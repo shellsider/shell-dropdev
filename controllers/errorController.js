@@ -29,6 +29,13 @@ const handleJWTExpiredError = function () {
   return new AppError('Your Token has Expired. Please login Again!', 401);
 };
 
+const handleMulterSizeError = function () {
+  return new AppError(
+    'File too large. Please upload a file within 1mb of size!',
+    400
+  );
+};
+
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -74,6 +81,7 @@ module.exports = (err, req, res, next) => {
     if (err.name === 'ValidationError') err = handleValidationErrorDB(err);
     if (err.name === 'JsonWebTokenError') err = handleJWTError();
     if (err.name === 'TokenExpiredError') err = handleJWTExpiredError();
+    if (err.code === 'LIMIT_FILE_SIZE') err = handleMulterSizeError();
 
     sendErrorProd(err, res);
   }

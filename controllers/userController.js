@@ -9,7 +9,6 @@ const {
   getDownloadURL,
   uploadBytesResumable,
 } = require('firebase/storage');
-const multer = require('multer');
 
 //Setting Up Firebase Config
 const firebaseConfig = {
@@ -27,9 +26,6 @@ initializeApp(firebaseConfig);
 
 //Initialise cloud storage and get reference to the service
 const storage = getStorage();
-
-//Setting up multer as middleware to grab photo uploads
-const upload = multer({ storage: multer.memoryStorage() });
 
 //Helper Functions
 const filterObj = (obj, ...allowedFields) => {
@@ -57,7 +53,7 @@ exports.uploadFile = catchAsync(async (req, res, next) => {
 
     const storageRef = ref(
       storage,
-      `${'Name: ' + req.user.name + ' Id: ' + req.user._id}/${
+      `${'Name:' + req.user.name + ' Id: ' + req.user._id}/${
         req.file.originalname + '       ' + dateTime
       }`
     );
@@ -97,6 +93,7 @@ exports.uploadFile = catchAsync(async (req, res, next) => {
       },
     });
   } catch (error) {
+    console.error(error);
     return next(
       new AppError(
         'Error occured while uploading the file. Please Try again later!',

@@ -4,11 +4,22 @@ const userController = require('./../controllers/userController.js');
 const authController = require('./../controllers/authController.js');
 const multer = require('multer');
 
+//Importing Multer Configeration
+const multerConfig = require('./../utils/multerConfig.js');
+
 //Router Declaration
 const router = express.Router();
 
+//Multer Configeration
+
 //Setting up multer as middleware to grab photo uploads
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer({
+  storage: multerConfig.storage,
+  fileFilter: multerConfig.fileFilter,
+  limits: {
+    fileSize: multerConfig.fileSizeLimit,
+  },
+});
 
 //Routes
 router.post('/signup', authController.signup);
