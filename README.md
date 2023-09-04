@@ -2,6 +2,58 @@
 
 The complete back end API of the Shell - drop zone application.
 
+Technologies Used:
+
+- JavaScript
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose ODM
+- NPM Middlewares
+
+Features:
+
+- Enables users to Upload a file and generate a download link that can be accessable from anywhere.
+- Types of files that can be uploaded : '.jpg', '.jpeg', '.png', '.gif', '.pdf', '.txt'
+- Size of the file : 1024 * 1024 KB (2MB)
+- User authentication is provided via JWT tokens.
+- Users can Sign up, Login, Create Links and get all there created links from the database.
+- A Forgot password facility is provided via which users can get a token to access the forgot password URL link to there email which will be valid for 10 mins.
+
+Security:
+
+- NoSQL Query Injection attacks Security middleware provided.
+- XSS attacks Security Middleware provided.
+- Admin has special privalages to access specific routes which the regualr user does not.
+- Authentication of routes is done before performing any actions.
+- Only 100 reqs per hour allowed per ip address.
+- Mongoose schema provided so the attacker can't add malicious entries.
+- Password Protection provided via using bcrypt.
+- Random password forgot tokens protection provided via Crypto Package
+
+To Use Set up a config.env file with these specific environment variable names:
+  NODE_ENV=
+  MONGO_URL = 
+  PORT = 
+  
+  JWT_SECRET=
+  JWT_EXPIRES_IN=
+  JWT_COOKIE_EXPIRES_IN=
+  
+  EMAIL_USERNAME=
+  EMAIL_PASSWORD=
+  EMAIL_HOST=
+  EMAIL_PORT=
+  
+  FIREBASE_API_KEY=
+  FIREBASE_AUTH_DOMAIN=
+  FIREBASE_PROJECT_ID=
+  FIREBASE_STORAGE_BUCKET=
+  FIREBASE_MESSAGING_SENDER_ID=
+  FIREBASE_APP_ID=
+  FIREBASE_MEASUREMENT_ID=
+
+ENDPOINTS:
 Base URL:
 http://127.0.0.1:{process.env.PORT}/api/v1/users
 
@@ -84,54 +136,3 @@ file: -attach file-
 
 14) http://127.0.0.1:{process.env.PORT}/api/v1/users/:id (DELETE)
 --Admin can delete a specific user's details by specifing there id in params. this action will completely delete the user from the database, contrast to the active property set to false
-
-Technologies Used:
-
-- JavaScript
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose ODM
-- NPM Middlewares
-
-Features:
-
-- Enables users to Upload a file and generate a download link that can be accessable from anywhere.
-- Types of files that can be uploaded : '.jpg', '.jpeg', '.png', '.gif', '.pdf', '.txt'
-- Size of the file : 1024 * 1024 KB (2MB)
-- User authentication is provided via JWT tokens.
-- Users can Sign up, Login, Create Links and get all there created links from the database.
-- A Forgot password facility is provided via which users can get a token to access the forgot password URL link to there email which will be valid for 10 mins.
-
-Security:
-
-- NoSQL Query Injection attacks Security middleware provided.
-- XSS attacks Security Middleware provided.
-- Admin has special privalages to access specific routes which the regualr user does not.
-- Authentication of routes is done before performing any actions.
-- Only 100 reqs per hour allowed per ip address.
-- Mongoose schema provided so the attacker can't add malicious entries.
-- Password Protection provided via using bcrypt.
-- Random password forgot tokens protection provided via Crypto Package
-
-To Use Set up a config.env file with these specific environment variable names:
-  NODE_ENV=
-  MONGO_URL = 
-  PORT = 
-  
-  JWT_SECRET=
-  JWT_EXPIRES_IN=
-  JWT_COOKIE_EXPIRES_IN=
-  
-  EMAIL_USERNAME=
-  EMAIL_PASSWORD=
-  EMAIL_HOST=
-  EMAIL_PORT=
-  
-  FIREBASE_API_KEY=
-  FIREBASE_AUTH_DOMAIN=
-  FIREBASE_PROJECT_ID=
-  FIREBASE_STORAGE_BUCKET=
-  FIREBASE_MESSAGING_SENDER_ID=
-  FIREBASE_APP_ID=
-  FIREBASE_MEASUREMENT_ID=
